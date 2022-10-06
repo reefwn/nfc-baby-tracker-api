@@ -32,7 +32,7 @@ func main() {
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	port, _ := viper.Get("PORT").(string)
-	r.Run(port)
+	r.Run(":" + port)
 }
 
 func setupRouter() *gin.Engine {
