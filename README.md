@@ -18,6 +18,12 @@ make doc
 make dev
 ```
 
+## Building the app
+
+```
+make build
+```
+
 ## Technologies & IDE
 
 <div>
