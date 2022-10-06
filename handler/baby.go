@@ -15,6 +15,14 @@ type Baby struct {
 	CreatedAt time.Time `json:"created_at" gorm:"default:now();not null"`
 }
 
+// SaveBaby             godoc
+// @Summary      Store a new baby
+// @Description  Takes a baby JSON and store in DB. Return saved JSON.
+// @Tags         Babies
+// @Produce      json
+// @Param        baby  body      Baby  true  "Baby JSON"
+// @Success      200   {object}  Baby
+// @Router       /babies [post]
 func (h *DbHandler) SaveBaby(c *gin.Context) {
 	Baby := Baby{}
 
@@ -31,12 +39,27 @@ func (h *DbHandler) SaveBaby(c *gin.Context) {
 	c.JSON(http.StatusOK, Baby)
 }
 
+// GetAllBaby                godoc
+// @Summary      Get all babies
+// @Description  Returns all babies.
+// @Tags         Babies
+// @Produce      json
+// @Success      200  {object}  Baby
+// @Router       /babies [get]
 func (h *DbHandler) GetAllBaby(c *gin.Context) {
 	Babys := []Baby{}
 	h.DB.Find(&Babys)
 	c.JSON(http.StatusOK, Babys)
 }
 
+// GetBaby                godoc
+// @Summary      Get single baby by id
+// @Description  Returns the baby whose id value matches the id.
+// @Tags         Babies
+// @Produce      json
+// @Param        id  path      string  true  "search baby by id"
+// @Success      200  {object}  Baby
+// @Router       /babies/{id} [get]
 func (h *DbHandler) GetBaby(c *gin.Context) {
 	id := c.Param("id")
 	Baby := Baby{}

@@ -1,0 +1,133 @@
+definitions:
+  handler.Activity:
+    properties:
+      baby_id:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: string
+      time:
+        type: string
+      type:
+        type: string
+    required:
+    - baby_id
+    - time
+    - type
+    type: object
+  handler.Baby:
+    properties:
+      created_at:
+        type: string
+      dob:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+info:
+  contact: {}
+  title: NFC Baby Tracker API
+  version: "1.0"
+paths:
+  /activities:
+    post:
+      description: Takes an activity JSON and store in DB. Return saved JSON.
+      parameters:
+      - description: Activity JSON
+        in: body
+        name: activity
+        required: true
+        schema:
+          $ref: '#/definitions/handler.Activity'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.Activity'
+      summary: Store a new activity
+      tags:
+      - Activities
+  /activities/{baby_id}/latest:
+    get:
+      description: Returns all baby's activities.
+      parameters:
+      - description: search activity by baby_id
+        in: path
+        name: baby_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.Activity'
+      summary: Get all latest activities of baby
+      tags:
+      - Activities
+  /babies:
+    get:
+      description: Returns all babies.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.Baby'
+      summary: Get all babies
+      tags:
+      - Babies
+    post:
+      description: Takes a baby JSON and store in DB. Return saved JSON.
+      parameters:
+      - description: Baby JSON
+        in: body
+        name: baby
+        required: true
+        schema:
+          $ref: '#/definitions/handler.Baby'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.Baby'
+      summary: Store a new baby
+      tags:
+      - Babies
+  /babies/{id}:
+    get:
+      description: Returns the baby whose id value matches the id.
+      parameters:
+      - description: search baby by id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.Baby'
+      summary: Get single baby by id
+      tags:
+      - Babies
+schemes:
+- https
+- http
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

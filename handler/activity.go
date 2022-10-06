@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"fmt"
 	"net/http"
 	"time"
 
@@ -17,6 +16,14 @@ type Activity struct {
 	CreatedAt time.Time `json:"created_at" gorm:"default:now();not null"`
 }
 
+// SaveActivity             godoc
+// @Summary      Store a new activity
+// @Description  Takes an activity JSON and store in DB. Return saved JSON.
+// @Tags         Activities
+// @Produce      json
+// @Param        activity  body      Activity  true  "Activity JSON"
+// @Success      200   {object}  Activity
+// @Router       /activities [post]
 func (h *DbHandler) SaveActivity(c *gin.Context) {
 	Activity := Activity{}
 
@@ -25,11 +32,25 @@ func (h *DbHandler) SaveActivity(c *gin.Context) {
 		return
 	}
 
-	fmt.Println("baby_id", &Activity.BabyId)
 	if err := h.DB.Save(&Activity).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, err.Error())
 		return
 	}
 
+	c.JSON(http.StatusOK, Activity)
+}
+
+// GetAllBaby                godoc
+// @Summary      Get all latest activities of baby
+// @Description  Returns all baby's activities.
+// @Tags         Activities
+// @Produce      json
+// @Param        baby_id  path      string  true  "search activity by baby_id"
+// @Success      200  {object}  Activity
+// @Router       /activities/{baby_id}/latest [get]
+func (h *DbHandler) GetLatestActivity(c *gin.Context) {
+	Activity := []Activity{}
+	baby_id := c.Param("baby_id")
+	h.DB.Find(&Activity, "baby_id", baby_id)
 	c.JSON(http.StatusOK, Activity)
 }
