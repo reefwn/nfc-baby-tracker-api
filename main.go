@@ -4,9 +4,10 @@ import (
 	"log"
 	"net/http"
 	"nfc-baby-tracker-api/handler"
+	"os"
 
 	"github.com/gin-gonic/gin"
-	"github.com/spf13/viper"
+	"github.com/joho/godotenv"
 
 	_ "nfc-baby-tracker-api/docs"
 
@@ -23,10 +24,9 @@ import (
 // @in                         header
 // @name                       Authorization
 func main() {
-	viper.SetConfigFile(".env")
-	err := viper.ReadInConfig()
+	err := godotenv.Load()
 	if err != nil {
-		log.Fatalf("Error while reading config file %s", err)
+		log.Fatal("Error loading .env file")
 	}
 
 	r := setupRouter()
@@ -37,7 +37,7 @@ func main() {
 	})
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
-	port, _ := viper.Get("PORT").(string)
+	port := os.Getenv("PORT")
 	r.Run(":" + port)
 }
 

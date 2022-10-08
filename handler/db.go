@@ -2,8 +2,8 @@ package handler
 
 import (
 	"log"
+	"os"
 
-	"github.com/spf13/viper"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -14,7 +14,7 @@ type DbHandler struct {
 }
 
 func (h *DbHandler) Initialize() {
-	dsn := viper.Get("DB_DSN").(string)
+	dsn := os.Getenv("DB_DSN")
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
 	})
