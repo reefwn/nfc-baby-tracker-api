@@ -22,6 +22,7 @@ type Activity struct {
 // @Tags         Activities
 // @Produce      json
 // @Param        activity  body      Activity  true  "Activity JSON"
+// @Security     ApiKeyAuth
 // @Success      200   {object}  Activity
 // @Router       /activities [post]
 func (h *DbHandler) SaveActivity(c *gin.Context) {
@@ -46,6 +47,7 @@ func (h *DbHandler) SaveActivity(c *gin.Context) {
 // @Tags         Activities
 // @Produce      json
 // @Param        baby_id  path      string  true  "search activity by baby_id"
+// @Security     ApiKeyAuth
 // @Success      200  {object}  Activity
 // @Router       /activities/{baby_id}/latest [get]
 func (h *DbHandler) GetLatestActivity(c *gin.Context) {

@@ -18,6 +18,11 @@ const docTemplate = `{
     "paths": {
         "/activities": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Takes an activity JSON and store in DB. Return saved JSON.",
                 "produces": [
                     "application/json"
@@ -49,6 +54,11 @@ const docTemplate = `{
         },
         "/activities/{baby_id}/latest": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Returns all baby's activities.",
                 "produces": [
                     "application/json"
@@ -78,6 +88,11 @@ const docTemplate = `{
         },
         "/babies": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Returns all babies.",
                 "produces": [
                     "application/json"
@@ -96,6 +111,11 @@ const docTemplate = `{
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Takes a baby JSON and store in DB. Return saved JSON.",
                 "produces": [
                     "application/json"
@@ -127,6 +147,11 @@ const docTemplate = `{
         },
         "/babies/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Returns the baby whose id value matches the id.",
                 "produces": [
                     "application/json"

@@ -21,6 +21,7 @@ type Baby struct {
 // @Tags         Babies
 // @Produce      json
 // @Param        baby  body      Baby  true  "Baby JSON"
+// @Security     ApiKeyAuth
 // @Success      200   {object}  Baby
 // @Router       /babies [post]
 func (h *DbHandler) SaveBaby(c *gin.Context) {
@@ -45,6 +46,7 @@ func (h *DbHandler) SaveBaby(c *gin.Context) {
 // @Tags         Babies
 // @Produce      json
 // @Success      200  {object}  Baby
+// @Security     ApiKeyAuth
 // @Router       /babies [get]
 func (h *DbHandler) GetAllBaby(c *gin.Context) {
 	Babys := []Baby{}
@@ -58,6 +60,7 @@ func (h *DbHandler) GetAllBaby(c *gin.Context) {
 // @Tags         Babies
 // @Produce      json
 // @Param        id  path      string  true  "search baby by id"
+// @Security     ApiKeyAuth
 // @Success      200  {object}  Baby
 // @Router       /babies/{id} [get]
 func (h *DbHandler) GetBaby(c *gin.Context) {

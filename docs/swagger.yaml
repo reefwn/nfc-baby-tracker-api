@@ -49,6 +49,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/handler.Activity'
+      security:
+      - ApiKeyAuth: []
       summary: Store a new activity
       tags:
       - Activities
@@ -68,6 +70,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/handler.Activity'
+      security:
+      - ApiKeyAuth: []
       summary: Get all latest activities of baby
       tags:
       - Activities
@@ -81,6 +85,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/handler.Baby'
+      security:
+      - ApiKeyAuth: []
       summary: Get all babies
       tags:
       - Babies
@@ -100,6 +106,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/handler.Baby'
+      security:
+      - ApiKeyAuth: []
       summary: Store a new baby
       tags:
       - Babies
@@ -119,6 +127,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/handler.Baby'
+      security:
+      - ApiKeyAuth: []
       summary: Get single baby by id
       tags:
       - Babies

@@ -10,6 +10,7 @@ import (
 	"github.com/joho/godotenv"
 
 	_ "nfc-baby-tracker-api/docs"
+	"nfc-baby-tracker-api/middleware"
 
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -47,12 +48,14 @@ func setupRouter() *gin.Engine {
 	h := handler.DbHandler{}
 	h.Initialize()
 
-	r.POST("/babies", h.SaveBaby)
-	r.GET("/babies/:id", h.GetBaby)
-	r.GET("/babies", h.GetAllBaby)
+	xApiKey := os.Getenv("X_API_KEY")
 
-	r.POST("activities", h.SaveActivity)
-	r.GET("activities/:baby_id/latest", h.GetLatestActivity)
+	r.POST("/babies", middleware.Validate(xApiKey), h.SaveBaby)
+	r.GET("/babies/:id", middleware.Validate(xApiKey), h.GetBaby)
+	r.GET("/babies", middleware.Validate(xApiKey), h.GetAllBaby)
+
+	r.POST("activities", middleware.Validate(xApiKey), h.SaveActivity)
+	r.GET("activities/:baby_id/latest", middleware.Validate(xApiKey), h.GetLatestActivity)
 
 	return r
 }
