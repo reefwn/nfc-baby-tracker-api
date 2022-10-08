@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"net/http"
 	"nfc-baby-tracker-api/handler"
 
 	"github.com/gin-gonic/gin"
@@ -29,6 +30,11 @@ func main() {
 	}
 
 	r := setupRouter()
+	r.GET("/", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"message": "api is runnig",
+		})
+	})
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	port, _ := viper.Get("PORT").(string)
