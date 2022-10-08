@@ -1,7 +1,7 @@
 package main
 
 import (
-	"log"
+	"fmt"
 	"net/http"
 	"nfc-baby-tracker-api/handler"
 	"os"
@@ -26,7 +26,7 @@ import (
 func main() {
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		fmt.Println("Error loading .env file")
 	}
 
 	r := setupRouter()
