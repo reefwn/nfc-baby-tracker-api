@@ -3,6 +3,7 @@ module nfc-baby-tracker-api
 go 1.19
 
 require (
+	github.com/gin-contrib/cors v1.4.0
 	github.com/google/uuid v1.3.0
 	github.com/swaggo/swag v1.8.6
 	gorm.io/gorm v1.23.10

@@ -53,6 +53,6 @@ func (h *DbHandler) SaveActivity(c *gin.Context) {
 func (h *DbHandler) GetLatestActivity(c *gin.Context) {
 	Activity := []Activity{}
 	baby_id := c.Param("baby_id")
-	h.DB.Find(&Activity, "baby_id", baby_id)
-	c.JSON(http.StatusOK, Activity)
+	h.DB.Order("time DESC").Limit(25).Find(&Activity, "baby_id", baby_id)
+	defer c.JSON(http.StatusOK, Activity)
 }
