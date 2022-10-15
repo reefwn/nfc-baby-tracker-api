@@ -26,7 +26,7 @@ make build
 
 ## Preview
 
-![swagger](https://github.com/reefwn/parcel-tracking-web/blob/main/preview.png?raw=true)
+![swagger](https://github.com/reefwn/nfc-baby-tracker-api/blob/main/preview.png?raw=true)
 
 ## Technologies & IDE
 
